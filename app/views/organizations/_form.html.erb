@@ -1,0 +1,61 @@
+
+<%= form_for(@organization, validate: true) do |f| %>
+<% if @organization.errors.any? %>
+<div id="error_explanation">
+  <h2><%= pluralize(@organization.errors.count, "error") %> prohibited this organization from being saved:</h2>
+
+  <ul>
+    <% @organization.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
+
+<div class="field">
+  <%= f.label :organization_name%><br>
+  <%= f.text_field :name, placeholder: "Organization Nam(req)", id: "org_name" %>
+</div>
+<div class="field">
+  <%= f.label :identifier %><br>
+  <%= f.text_field :org_identifier, placeholder: "enter_org_name", readonly: true, validate: false %>
+</div>
+<%= f.fields_for :user do |h| %>
+       <div class="field">
+          <%= h.label :first_name%><br>
+          <%= h.text_field :first_name, placeholder: "First Name(req)", value: @user.try(:first_name) %>
+       </div>
+       <div class="field">
+          <%= h.label :last_name %><br>
+          <%= h.text_field :last_name, placeholder: "Lst Name(req)", value: @user.try(:first_name) %>
+       </div>
+<% end %>
+<div class="field">
+  <%= f.label :line1%><br>
+  <%= f.text_field :address_line1, placeholder: "Line 1(req)" %>
+</div>
+<div class="field">
+  <%= f.label :line2 %><br>
+  <%= f.text_field :address_line2, placeholder: "Line 2" %>
+</div>
+<div class="field">
+  <%= f.label :city%><br>
+  <%= f.text_field :city, placeholder: "City(req)" %>
+</div>
+<div class="field">
+  <%= f.label :country %><br>
+  <%= f.text_field :country, placeholder: "Country(req)" %>
+</div>
+<div class="field">
+  <%= f.label :state %><br>
+  <%= f.text_field :state, placeholder: "State" %>
+</div>
+<div class="field">
+  <%= f.label :zipcode %><br>
+  <%= f.text_field :zipcode, placeholder: "Zip Code(req)" %>
+</div>
+
+<div class="actions">
+  <%= f.submit %>
+</div>
+<% end %>
