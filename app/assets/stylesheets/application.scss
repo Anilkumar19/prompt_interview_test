@@ -25,6 +25,30 @@
 	margin-left: 250px;
 }
 
+h1, .h1, h2, .h2, h3, .h3 {
+margin-top: 0px;
+margin-bottom: 10px;
+}
+
+.admin_class {
+	float: right;
+	margin-right: 15px;
+}
+
+#search {
+	width: 350px;
+	margin-left: 5px;
+}
+
+.table_data {
+	margin-top: 10px;
+	margin-left: 2px;
+}
+
+table, th, td {
+	margin-left: 3px;
+	border: 2px solid black;
+}
 /*.field {
 	height: 
 }*/

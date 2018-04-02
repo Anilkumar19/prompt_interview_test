@@ -1,19 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>ApplicationTest</title>
+	<title>Upcoming App</title>
 	<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
 	<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 	<%= csrf_meta_tags %>
 </head>
 <body>
-	<p class="notice"><%= notice %></p>
-	<p class="alert"><%= alert %></p>
+ <h1 style="text-align: center;">Prompt App</h1>
 	<% if user_signed_in? %>
-	
+	   <p class="notice"><%= notice %></p>
+	   <p class="alert"><%= alert %></p>
 		<%= link_to('Logout', destroy_user_session_path, method: :delete, id: "log_out_user") %>        
 	
 	<% else %>
+	<p class="notice"><%= notice %></p>
+	<p class="alert"><%= alert %></p>
 	<!-- <li>
 		<%#= link_to('Login', new_user_session_path)  %>  
 	</li> -->
