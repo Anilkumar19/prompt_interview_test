@@ -5,6 +5,13 @@ class UsersController < ApplicationController
   # GET /users.json
   def index
     @users = User.all
+    if params[:search]
+      user = User.find_by_email(params[:search])
+      @organizations = current_user.organizations.where('name = ? OR country = ? OR user_id = ?', params[:search], params[:search], user.try(:id)).paginate(:page => params[:page], :per_page => 10)
+    else
+      @organizations = current_user.organizations.all.paginate(:page => params[:page], :per_page => 10)
+    end
+
   end
 
   # GET /users/1
@@ -64,11 +71,11 @@ class UsersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
-      @user = User.find(params[:id])
+      @user = current_user #User.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:mobile, :first_name, :last_name)
+      params.require(:user).permit(:mobile, :first_name, :last_name, :is_admin)
     end
 end

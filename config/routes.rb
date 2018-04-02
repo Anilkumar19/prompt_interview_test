@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   root 'organizations#index'
   resources :users
   resources :organizations
+  #for admin user path
+   get '/admin' => 'organizations#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

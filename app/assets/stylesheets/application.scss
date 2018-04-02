@@ -13,3 +13,18 @@
  *= require_tree .
  *= require_self
  */
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+#log_out_user {
+	float: right;
+	margin-right: 20px;
+}
+
+.horizantal {
+	margin-left: 250px;
+}
+
+/*.field {
+	height: 
+}*/

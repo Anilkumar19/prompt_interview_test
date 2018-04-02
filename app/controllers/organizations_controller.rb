@@ -4,12 +4,16 @@ class OrganizationsController < ApplicationController
   # GET /organizations
   # GET /organizations.json
   def index
-    @organizations = current_user.organizations.all
+    @organizations = current_user.organizations.all.paginate(:page => params[:page], :per_page => 10)
     @organization = Organization.new
     
+    if current_user.is_admin
+      render 'users/show'
+    else
       unless @organizations.present?
         render :new
       end
+    end
   end
 
   # GET /organizations/1
@@ -20,7 +24,6 @@ class OrganizationsController < ApplicationController
   # GET /organizations/new
   def new
     @user = current_user
-    binding.pry
     @organization = Organization.new
   end
 
@@ -39,9 +42,10 @@ class OrganizationsController < ApplicationController
     @organization.user_id = current_user.id
 
     respond_to do |format|
-      if @organization.save && @user.save
-        format.html { redirect_to @organization, notice: 'Organization was successfully created.' }
-        format.json { render :show, status: :created, location: @organization }
+      if @user.save && @organization.save 
+        format.html { redirect_to @organization }
+        #notice: 'Organization was successfully created.'
+        format.json { render :show, status: :created }
       else
         format.html { render :new }
         format.json { render json: @organization.errors, status: :unprocessable_entity }
@@ -59,7 +63,7 @@ class OrganizationsController < ApplicationController
     respond_to do |format|
       if @organization.update(organization_params)
         format.html { redirect_to @organization, notice: 'Organization was successfully updated.' }
-        format.json { render :show, status: :ok, location: @organization }
+        format.json { render :show, status: :ok }
       else
         format.html { render :edit }
         format.json { render json: @organization.errors, status: :unprocessable_entity }
